@@ -6,6 +6,7 @@
 
 ################################################################################
 ## Parameter definition section                                               ##
+## Below are all the libraries that will be used for the project
 ################################################################################
 
 library(plyr)
@@ -17,12 +18,14 @@ library(data.table)
 raw.data.url <- paste0("https://d396qusza40orc.cloudfront.net/getdata%2F","projectfiles%2FUCI%20HAR%20Dataset.zip")
 raw.data.file <- "UCI_HAR_Dataset.zip"
 
-i=1
+## Checking below if the file exist, if not it will be downloaded
 
+i=1
 if (!file.exists(raw.data.file)) {download.file(raw.data.url, destfile=raw.data.file)}
 
 
-#Naming the datasets that we will use
+
+#Naming the datasets that we will use, for more explanations about those datasets please look at the codebook.md
 activityLabels <- read.table("UCI HAR Dataset/activity_labels.txt", header = FALSE,sep = "")
 features <- read.table("UCI HAR Dataset/features.txt",header = FALSE,sep = "")
 train_X_Activities <- read.table("UCI HAR Dataset/train/X_train.txt",header = FALSE,sep = "")
@@ -47,6 +50,7 @@ Subjects <- rbind(trainSubjects,testSubjects)
 
 # Assignment Instruction 3 & 4: Name the activities in the data set & appropriately label the data set
 # We will voluntarily keep the name duplicates in features as no instruction was given for those
+
 levels(features$V2) <- gsub("-","_",levels(features$V2))
 levels(features$V2) <- gsub("\\(","",levels(features$V2))
 levels(features$V2) <- gsub(")","",levels(features$V2))
